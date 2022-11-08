@@ -79,11 +79,12 @@ public class AnagramChecker {
         }
     }
 
-    public static boolean isCurrentTestInTestHistory(ArrayList<ArrayList<String>> pastResultsList,
+    public static boolean isCurrentTestInHistory(ArrayList<ArrayList<String>> pastResultsList,
             UserSearch thisUserSearch) {
         for (ArrayList<String> result : pastResultsList) {
             String thisTest = thisUserSearch.getFirstWord() + thisUserSearch.getSecondWord();
             if (thisTest.equals(result.get(1) + result.get(2)) || thisTest.equals(result.get(2) + result.get(1))) {
+                thisUserSearch.setIsAnagram(Boolean.parseBoolean(result.get(3)));
                 return true;
             } else
                 continue;
@@ -108,14 +109,16 @@ public class AnagramChecker {
 
         System.out.println("\nOld Results: \n" + pastResultsList);
 
-        if (isCurrentTestInTestHistory(pastResultsList, thisUserSearch))
+        if (isCurrentTestInHistory(pastResultsList, thisUserSearch)) {
             System.out.println("Duplicate Values");
-
-        thisUserSearch.setIsAnagram(areStringsAnagram(thisUserSearch.getFirstWord(), thisUserSearch.getSecondWord()));
-
-        writeToResults(System.getProperty("user.dir") + "\\anagramResults.txt", thisUserSearch);
+            writeToResults(System.getProperty("user.dir") + "\\anagramResults.txt", thisUserSearch);
+        } else {
+            thisUserSearch
+                    .setIsAnagram(areStringsAnagram(thisUserSearch.getFirstWord(), thisUserSearch.getSecondWord()));
+            writeToResults(System.getProperty("user.dir") + "\\anagramResults.txt", thisUserSearch);
+        }
 
         System.out.println("\nAre words '" + thisUserSearch.getFirstWord() + "' and '" + thisUserSearch.getSecondWord()
-                + " anagrams: " + thisUserSearch.getIsAnagram());
+                + " anagrams -> " + thisUserSearch.getIsAnagram());
     }
 }
