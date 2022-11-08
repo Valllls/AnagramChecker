@@ -1,0 +1,13 @@
+david,abc,cba,true,
+paul,mum,mum,true,
+niall,Gff,ggF,false,David,qwe,ewq,true
+David,qwe,ewq,true
+David,qwe,ewq,true
+David,qwe,ewq,true
+d,d,d,true
+falco,racecar,racecar,true
+richard,rdaric,richard,false
+falco,ret,tre,true
+David,Patrick,Patrikc,true
+David,adg,gda,true
+David,ThisisMyWord,ThisMyWordIS,true
