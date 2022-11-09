@@ -7,6 +7,10 @@ import java.util.Scanner;
 import java.io.*;
 
 public class AnagramChecker {
+
+    public AnagramChecker() {
+    }
+
     /**
      * Given two strings this method will return true if there are anagrams of one
      * another and false if not.
@@ -124,16 +128,16 @@ public class AnagramChecker {
      * @return boolean true if currentQuery is within pastResultsList or boolean
      *         false if not.
      */
-    public boolean isCurrentTestInHistory(ArrayList<UserQuery> pastResultsList,
+    public boolean isCurrentQueryInHistory(ArrayList<UserQuery> pastResultsList,
             UserQuery thisUserQuery) {
         System.out.println("Searching the results list for the current Query");
 
         for (UserQuery result : pastResultsList) {
-            String thisTest = thisUserQuery.getFirstWord() + thisUserQuery.getSecondWord();
+            String thisQuery = thisUserQuery.getFirstWord() + thisUserQuery.getSecondWord();
             // If the current 'result' in the pastResultsList has anything but for values it
             // is invalid and should be ignored
-            if (thisTest.equals(result.getFirstWord() + result.getSecondWord())
-                    || thisTest.equals(result.getFirstWord() + result.getSecondWord())) {
+            if (thisQuery.equals(result.getFirstWord() + result.getSecondWord())
+                    || thisQuery.equals(result.getFirstWord() + result.getSecondWord())) {
                 thisUserQuery.setIsQueryAnAnagram(result.getIsQueryAnAnagram());
                 System.out.println("Current query was found in the list of previous results");
                 return true;
@@ -163,7 +167,7 @@ public class AnagramChecker {
         // Store these results in an ArrayList of UserQuery
         ArrayList<UserQuery> pastResultsList = myAnagramChecker.readInResults(storedResultsFilePath);
 
-        if (myAnagramChecker.isCurrentTestInHistory(pastResultsList, thisUserQuery)) {
+        if (myAnagramChecker.isCurrentQueryInHistory(pastResultsList, thisUserQuery)) {
             System.out.println("Duplicate Values Found: ");
             myAnagramChecker.writeToResults(storedResultsFilePath, thisUserQuery);
         } else {

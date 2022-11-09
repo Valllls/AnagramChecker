@@ -57,6 +57,7 @@ public class Tests {
         UserQuery userQuery1 = new UserQuery("David", "qwerty", "qwreyt", true);
         ArrayList<UserQuery> pastResultsList = new ArrayList<UserQuery>();
         pastResultsList.add(userQuery1);
+        AnagramChecker myAnagramChecker = new AnagramChecker();
         assertEquals(true, myAnagramChecker.isCurrentQueryInHistory(pastResultsList, userQuery1));
     }
 
@@ -71,6 +72,7 @@ public class Tests {
         UserQuery userQuery2 = new UserQuery("Richard", "zxc", "cvb", false);
         ArrayList<UserQuery> pastResultsList = new ArrayList<UserQuery>();
         pastResultsList.add(userQuery1);
+        AnagramChecker myAnagramChecker = new AnagramChecker();
         assertEquals(false, myAnagramChecker.isCurrentQueryInHistory(pastResultsList, userQuery2));
     }
 
