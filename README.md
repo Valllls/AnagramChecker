@@ -10,16 +10,16 @@ AnagramChecker is a Java program compiled and unit tested using the gradle build
 ## Requirements
 - Gradle 7.5.1
 - junit 4.13.2
-- \>=Java 7.0 
+- Built using Java SE 18 however any version above 11 should be compatible.
 
 ### Using the program
-- To run the program compile using gradle and the command. 
+- To run the program compile using gradle with the command:
 [-q to suppress all non error logs]
 [--console plain to force gradle to compile a plain (no colour/rich output) console application]
 ```sh
 ./gradlew -q --console plain run
 ```
-- To run the junit tests generated for this project use the command
+- To run the junit tests generated for this project use the command:
 ```
 ./gradlew test
 ```
