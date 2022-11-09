@@ -2,8 +2,6 @@ package anagramchecker;
 
 import java.util.*;
 
-import com.google.common.base.StandardSystemProperty;
-
 public class UserQuery {
 
     String username;
