@@ -29,14 +29,11 @@ public class AnagramChecker {
         if (firstString.length() != secondString.length())
             return false;
         else {
-            // Create a hashmap to store the occurances of each character in the strings
+            // Create a hashmap to store the occurances of each character in the two strings
             HashMap<Character, Integer> countCharacterOccurances = new HashMap<Character, Integer>();
 
             for (int i = 0; i < firstString.length(); i++) {
 
-                if (!Character.isAlphabetic(firstString.charAt(i)) || !Character.isAlphabetic(secondString.charAt(i))) {
-                    return false;
-                }
                 // For each instance of a char in 'firstString' add one to the value in the
                 // hashmap 'countCharacterOccurances' with this char as its key.
                 // For each instance of a char in 'secondString' remove one to the value in the
@@ -69,7 +66,7 @@ public class AnagramChecker {
      * @return An ArrayList of the UserQueries read in from the results file.
      */
     public ArrayList<UserQuery> readInResults(String filePath) {
-        System.out.println("Reading in past results from the results file");
+        System.out.print("Reading in past results from the results file...");
         ArrayList<UserQuery> pastResultsList = new ArrayList<UserQuery>();
         String[] temporaryQueryStorage;
         try {
@@ -81,13 +78,14 @@ public class AnagramChecker {
                             temporaryQueryStorage[2], Boolean.parseBoolean(temporaryQueryStorage[3])));
                 else {
                     System.out.println(
-                            "Error with reading in the query results, some queries did not have to required four values (username, firstWord, secondWord, isQueryAnAnagram)");
+                            "\nError with reading in the query results, some queries did not have to required four values (username, firstWord, secondWord, isQueryAnAnagram)");
                 }
             }
             resultsFileReader.close();
         } catch (FileNotFoundException fileNotFound) {
             System.out.println("Results file not found in result reading");
         }
+        System.out.println(" Done");
         return pastResultsList;
     }
 
@@ -100,7 +98,7 @@ public class AnagramChecker {
      * @param thisUserQuery The UserQuery to be written to the results file
      */
     public void writeToResults(String filePath, UserQuery thisUserQuery) {
-        System.out.println("Writing query result to the results file");
+        System.out.print("Writing query result to the results file...");
         try {
             BufferedWriter resultsFileWrite = new BufferedWriter(
                     new FileWriter(filePath, true));
@@ -109,8 +107,9 @@ public class AnagramChecker {
                             + thisUserQuery.getSecondWord() + "," + thisUserQuery.getIsQueryAnAnagram());
             resultsFileWrite.close();
         } catch (IOException fileNotFound) {
-            System.out.println("Results file not found in result writing");
+            System.out.println("\nResults file not found in result writing");
         }
+        System.out.println(" Done");
     }
 
     /**
@@ -131,7 +130,7 @@ public class AnagramChecker {
      */
     public boolean isCurrentQueryInHistory(ArrayList<UserQuery> pastResultsList,
             UserQuery thisUserQuery) {
-        System.out.println("Searching the results list for the current Query");
+        System.out.print("Searching the results list for the current Query...");
 
         for (UserQuery result : pastResultsList) {
             String thisQuery = thisUserQuery.getFirstWord() + thisUserQuery.getSecondWord();
@@ -140,12 +139,12 @@ public class AnagramChecker {
             if (thisQuery.equals(result.getFirstWord() + result.getSecondWord())
                     || thisQuery.equals(result.getFirstWord() + result.getSecondWord())) {
                 thisUserQuery.setIsQueryAnAnagram(result.getIsQueryAnAnagram());
-                System.out.println("Current query was found in the list of previous results");
+                System.out.println(" Done\n[Current query was found in the list of previous results]");
                 return true;
             } else
                 continue;
         }
-        System.out.println("Current query was not found in the list of previous results");
+        System.out.print(" Done\n[Current query was not found in the list of previous results]");
         return false;
     }
 
@@ -169,7 +168,6 @@ public class AnagramChecker {
         ArrayList<UserQuery> pastResultsList = myAnagramChecker.readInResults(storedResultsFilePath);
 
         if (myAnagramChecker.isCurrentQueryInHistory(pastResultsList, thisUserQuery)) {
-            System.out.println("Duplicate Values Found: ");
             myAnagramChecker.writeToResults(storedResultsFilePath, thisUserQuery);
         } else {
             thisUserQuery.setIsQueryAnAnagram(
@@ -178,7 +176,8 @@ public class AnagramChecker {
             myAnagramChecker.writeToResults(storedResultsFilePath, thisUserQuery);
         }
 
-        System.out.println("\nAre words '" + thisUserQuery.getFirstWord() + "' and '" + thisUserQuery.getSecondWord()
-                + "' anagrams -> " + thisUserQuery.getIsQueryAnAnagram());
+        System.out.println(
+                "\n--Results--\nAre words '" + thisUserQuery.getFirstWord() + "' and '" + thisUserQuery.getSecondWord()
+                        + "' anagrams -> " + (thisUserQuery.getIsQueryAnAnagram() ? "Yes" : "No"));
     }
 }

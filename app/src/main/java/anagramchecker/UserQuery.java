@@ -2,6 +2,8 @@ package anagramchecker;
 
 import java.util.*;
 
+import com.google.common.base.StandardSystemProperty;
+
 public class UserQuery {
 
     String username;
@@ -52,18 +54,30 @@ public class UserQuery {
     }
 
     public UserQuery readQueryInfoFromUser() {
+        System.out.println("--Reading in UserQuery--");
         Scanner userInputScanner = new Scanner(System.in);
+        System.out.print("Username: ");
+        this.setUsername(userInputScanner.nextLine());
+        System.out.print("First Word: ");
+        this.setFirstWord(userInputScanner.nextLine());
+        System.out.print("Second Word: ");
+        this.setSecondWord(userInputScanner.nextLine());
+        System.out.println();
+        userInputScanner.close();
 
-        try {
-            System.out.print("Username: ");
-            this.setUsername(userInputScanner.nextLine());
-            System.out.print("First Word: ");
-            this.setFirstWord(userInputScanner.nextLine());
-            System.out.print("Second Word: ");
-            this.setSecondWord(userInputScanner.nextLine());
-            userInputScanner.close();
-        } catch (NoSuchElementException error) {
-            System.out.println("Entered String was empty");
+        // Confirms that the UserQuery parameters are not empty
+        if (this.getUsername().isEmpty() || this.getFirstWord().isEmpty() || this.getSecondWord().isEmpty()) {
+            System.out.println("ERROR: One of the entered strings was empty");
+            System.exit(0);
+        }
+
+        // The initial release of the software ignores all Strings that contain special
+        // characters or spaces.
+        // The if statement below will close the program if either the first or second
+        // words contain anything but Alphabetic characters.
+        if (!this.getFirstWord().matches("[a-zA-Z]+") || !this.getSecondWord().matches("[a-zA-Z]+")) {
+            System.out.println("ERROR: First Word and Second Word contain special characters (i.e. non-alphabetic)");
+            System.exit(0);
         }
         return this;
     }
