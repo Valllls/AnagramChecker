@@ -25,7 +25,7 @@ public class Tests {
     // are equal the test assures that the writing of results to a file is working
     // as intended.
     @Test
-    public void writingToFile() {
+    public void writeToResults() {
         Path testFile = Paths.get(System.getProperty("user.dir")
                 + "\\src\\test\\resources\\testResultsFile.txt");
         Path groundTruthFile = Paths.get(System.getProperty("user.dir")
@@ -57,7 +57,6 @@ public class Tests {
         UserQuery userQuery1 = new UserQuery("David", "qwerty", "qwreyt", true);
         ArrayList<UserQuery> pastResultsList = new ArrayList<UserQuery>();
         pastResultsList.add(userQuery1);
-        AnagramChecker myAnagramChecker = new AnagramChecker();
         assertEquals(true, myAnagramChecker.isCurrentQueryInHistory(pastResultsList, userQuery1));
     }
 
@@ -72,19 +71,18 @@ public class Tests {
         UserQuery userQuery2 = new UserQuery("Richard", "zxc", "cvb", false);
         ArrayList<UserQuery> pastResultsList = new ArrayList<UserQuery>();
         pastResultsList.add(userQuery1);
-        AnagramChecker myAnagramChecker = new AnagramChecker();
         assertEquals(false, myAnagramChecker.isCurrentQueryInHistory(pastResultsList, userQuery2));
     }
 
-    // Tests the areStringsAnagrams function to return true if two strings are given
-    // that are anagrams.
+    // Tests the areStringsAnagrams function to return true if the two strings given
+    // are anagrams.
     @Test
     public void correctlyFindsAnagram() {
         assertEquals(true, myAnagramChecker.areStringsAnagrams("angered", "enraged"));
     }
 
-    // Tests the areStringsAnagrams function to return false if two strings are
-    // given that are not anagrams.
+    // Tests the areStringsAnagrams function to return false if the two strings
+    // given are not anagrams.
     @Test
     public void correctlyFindsNoAnagram() {
         assertEquals(false, myAnagramChecker.areStringsAnagrams("angeered", "enraged"));

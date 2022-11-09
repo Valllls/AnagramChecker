@@ -24,8 +24,8 @@ public class AnagramChecker {
      * @return a boolean value indicating if the strings are anagrams.
      */
     public boolean areStringsAnagrams(String firstString, String secondString) {
-        // If the strings do not match in length they cannot be anagrams
-        // Therefore return false
+        // If the strings do not match in length they cannot be anagrams therefore
+        // return false
         if (firstString.length() != secondString.length())
             return false;
         else {
@@ -37,10 +37,10 @@ public class AnagramChecker {
                 if (!Character.isAlphabetic(firstString.charAt(i)) || !Character.isAlphabetic(secondString.charAt(i))) {
                     return false;
                 }
-                // For each instance of a char in 'firstString' add one to this chars value in
-                // the hashmap 'countCharacterOccurances'.
-                // For each instance of a char in 'secondString' remove one from this chars
-                // value in the hashmap 'countCharacterOccurances'.
+                // For each instance of a char in 'firstString' add one to the value in the
+                // hashmap 'countCharacterOccurances' with this char as its key.
+                // For each instance of a char in 'secondString' remove one to the value in the
+                // hashmap 'countCharacterOccurances' with this char as its key.
                 countCharacterOccurances.put(Character.toLowerCase(firstString.charAt(i)),
                         countCharacterOccurances.getOrDefault(Character.toLowerCase(firstString.charAt(i)), 0) + 1);
                 countCharacterOccurances.put(Character.toLowerCase(secondString.charAt(i)),
@@ -48,7 +48,8 @@ public class AnagramChecker {
             }
 
             // If the strings are anagrams then the occurances of each char should have
-            // canceled out, i.e. each char will have a value of 0.
+            // canceled out, i.e. each char(key) in the Hashmap 'countCharacterOccurances'
+            // will have a value of 0.
             for (char key : countCharacterOccurances.keySet())
                 if (countCharacterOccurances.get(key) == 0)
                     continue;
@@ -163,7 +164,7 @@ public class AnagramChecker {
         UserQuery thisUserQuery = new UserQuery();
         thisUserQuery.readQueryInfoFromUser();
 
-        // Read in previoused stored results from the result file
+        // Read in previous stored results from the result file
         // Store these results in an ArrayList of UserQuery
         ArrayList<UserQuery> pastResultsList = myAnagramChecker.readInResults(storedResultsFilePath);
 
