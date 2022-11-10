@@ -31,4 +31,4 @@ i.e. "AbC" is an anagram of "aBc" despite different cases occuring.
 - If two Strings contain the same number of each character then they are anagrams of each other. Whether or not the two Strings are actually words contained within a dictionary was ignored for this project. For instance, while 'abb' and 'bba' are considered anagrams by this program neither one is a real word.
 
 ### Screenshot of a user entering a query:
-![Screenshot of a user entering a query and the programs result](exampleResults.png)
+![Screenshot of a user entering a query and the programs result](exampleUserEnteringAQuery.png)
