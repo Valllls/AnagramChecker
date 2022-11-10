@@ -144,7 +144,7 @@ public class AnagramChecker {
             } else
                 continue;
         }
-        System.out.print(" Done\n[Current query was not found in the list of previous results]");
+        System.out.println(" Done\n[Current query was not found in the list of previous results]");
         return false;
     }
 
@@ -167,14 +167,13 @@ public class AnagramChecker {
         // Store these results in an ArrayList of UserQuery
         ArrayList<UserQuery> pastResultsList = myAnagramChecker.readInResults(storedResultsFilePath);
 
-        if (myAnagramChecker.isCurrentQueryInHistory(pastResultsList, thisUserQuery)) {
-            myAnagramChecker.writeToResults(storedResultsFilePath, thisUserQuery);
-        } else {
+        if (!myAnagramChecker.isCurrentQueryInHistory(pastResultsList, thisUserQuery)) {
             thisUserQuery.setIsQueryAnAnagram(
                     myAnagramChecker.areStringsAnagrams(thisUserQuery.getFirstWord(),
                             thisUserQuery.getSecondWord()));
             myAnagramChecker.writeToResults(storedResultsFilePath, thisUserQuery);
-        }
+        } else
+            System.out.println("Query not written to results file");
 
         System.out.println(
                 "\n--Results--\nAre words '" + thisUserQuery.getFirstWord() + "' and '" + thisUserQuery.getSecondWord()
